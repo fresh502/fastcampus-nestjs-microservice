@@ -1,0 +1,15 @@
+FROM node:18.14.2
+
+WORKDIR /usr/src/app
+
+RUN mkdir video-storage
+RUN npm install -g @nestjs/cli
+
+# Copy application dependency manifests to the container image.
+# Copying this first prevents re-running npm install on every code change.
+COPY package*.json ./
+
+COPY . .
+
+CMD npm install && \
+  nest start --watch

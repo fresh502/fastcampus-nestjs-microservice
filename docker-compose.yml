@@ -1,0 +1,72 @@
+version: '3'
+
+volumes:
+  microservice_postgres_data:
+
+
+services:
+  api-gateway:
+    image: api-gateway
+    build:
+      context: ./apps/api-gateway
+      dockerfile: dockerfile
+    container_name: api-gateway
+    depends_on:
+      - user-service
+      - video-service
+      - analytics-service
+    volumes:
+      - /tmp/history/npm-cache:/root/.npm:z
+      - ./apps/api-gateway/src:/usr/src/app/src:z
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - STAGE=local
+      - POSTGRES_HOST=host.docker.internal
+    restart: "no"
+
+  user-service:
+    image: user-service
+    build:
+      context: ./apps/user
+      dockerfile: dockerfile
+    container_name: user-service
+    volumes:
+      - /tmp/history/npm-cache:/root/.npm:z
+      - ./apps/user/src:/usr/src/app/src:z
+    environment:
+      - PORT=3001
+      - STAGE=local
+      - POSTGRES_HOST=host.docker.internal
+    restart: "no"
+
+  video-service:
+    image: video-service
+    build:
+      context: ./apps/video
+      dockerfile: dockerfile
+    container_name: video-service
+    volumes:
+      - /tmp/history/npm-cache:/root/.npm:z
+      - ./apps/video/src:/usr/src/app/src:z
+    environment:
+      - PORT=3002
+      - STAGE=local
+      - POSTGRES_HOST=host.docker.internal
+    restart: "no"
+
+  analytics-service:
+    image: analytics-service
+    build:
+      context: ./apps/video
+      dockerfile: dockerfile
+    container_name: analytics-service
+    volumes:
+      - /tmp/history/npm-cache:/root/.npm:z
+      - ./apps/analytics/src:/usr/src/app/src:z
+    environment:
+      - PORT=3003
+      - STAGE=local
+      - POSTGRES_HOST=host.docker.internal
+    restart: "no"

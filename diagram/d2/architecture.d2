@@ -1,0 +1,28 @@
+direction: right
+
+client: Client
+
+client -> docker_compose.api_gateway: request
+
+docker_compose: docker-compose {
+  api_gateway: API Gateway
+  user: User
+  video: Video
+  analytics: Analytics
+
+  kafka: Kafka
+  user_db: User DB
+  video_db: Video DB
+  analytics_db: Analytics DB
+
+  api_gateway -> user: http
+  api_gateway -> video: http
+  api_gateway -> analytics: http
+
+  video -> kafka: produce
+  kafka -> analytics: consume
+
+  user -> user_db
+  video -> video_db
+  analytics -> analytics_db
+}

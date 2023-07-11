@@ -1,0 +1,48 @@
+shape: sequence_diagram
+
+client: Client
+
+api_gateway: API Gateway
+user: User
+video: Video
+analytics: Analytics
+
+sync: {
+  client.message -> api_gateway.message: request
+  api_gateway.message -> user.message
+  user.message -> api_gateway.message: {
+    target-arrowhead: {
+      shape: arrow
+    }
+    style: {
+      stroke-dash: 3
+    }
+  }
+  api_gateway.message -> video.message
+  video.message -> api_gateway.message: {
+    target-arrowhead: {
+      shape: arrow
+    }
+    style: {
+      stroke-dash: 3
+    }
+  }
+  api_gateway.message -> analytics.message
+  analytics.message -> api_gateway.message: {
+    target-arrowhead: {
+      shape: arrow
+    }
+    style: {
+      stroke-dash: 3
+    }
+  }
+  api_gateway.message -> client.message: response
+}
+
+async: {
+  video -> analytics -> video: {
+    target-arrowhead: {
+      shape: arrow
+    }
+  }
+}
