@@ -15,9 +15,9 @@ docker_compose: docker-compose {
   video_db: Video DB
   analytics_db: Analytics DB
 
-  api_gateway -> user: http
-  api_gateway -> video: http
-  api_gateway -> analytics: http
+  api_gateway -> user: TCP
+  api_gateway -> video: TCP
+  api_gateway -> analytics: TCP
 
   video -> kafka: produce
   kafka -> analytics: consume
