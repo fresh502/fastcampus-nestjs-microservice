@@ -18,7 +18,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./apps/microservice/test/jest-e2e.json",
-    "docker": "cp ./package.json ./apps/api-gateway && cp ./package.json ./apps/user && cp ./package.json ./apps/video && cp ./package.json ./apps/analytics && docker-compose -p nestjs down && docker-compose -p nestjs up --remove-orphans"
+    "microservice": "cp ./package.json ./apps/api-gateway && cp ./package.json ./apps/user && cp ./package.json ./apps/video && cp ./package.json ./apps/analytics && docker-compose -p microservice down && docker-compose -p microservice up --remove-orphans",
+    "postgres": "docker-compose -f postgres.yml -p postgres down && docker-compose -f postgres.yml -p postgres up --remove-orphans"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
