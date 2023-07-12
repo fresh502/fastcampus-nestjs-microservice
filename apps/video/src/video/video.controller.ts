@@ -1,6 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
-import { VideoService } from './video.service';
+import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
+import { VideoService } from './video.service';
 
 @Controller()
 export class VideoController {

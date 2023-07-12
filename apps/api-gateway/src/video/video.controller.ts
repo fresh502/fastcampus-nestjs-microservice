@@ -19,9 +19,9 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Response } from 'express';
-import { ApiPostResponse } from 'src/common/decorator/swagger.decorator';
-import { PageReqDto } from 'src/common/dto/req.dto';
-import { PageResDto } from 'src/common/dto/res.dto';
+import { ApiPostResponse } from '../common/decorator/swagger.decorator';
+import { PageReqDto } from '../common/dto/req.dto';
+import { PageResDto } from '../common/dto/res.dto';
 import { User, UserAfterAuth } from '../common/decorator/user.decorator';
 import { CreateVideoReqDto, FindVideoReqDto } from './dto/req.dto';
 import { CreateVideoResDto, FindVideoResDto } from './dto/res.dto';
