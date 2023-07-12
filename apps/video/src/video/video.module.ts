@@ -17,9 +17,6 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
             clientId: 'video',
             brokers: ['host.docker.internal:9092'],
           },
-          consumer: {
-            groupId: 'video-consumer',
-          },
         },
       },
     ]),

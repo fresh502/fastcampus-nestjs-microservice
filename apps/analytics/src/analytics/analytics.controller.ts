@@ -11,17 +11,9 @@ import {
 export class AnalyticsController {
   constructor(private readonly analyticsService: AnalyticsService) {}
 
-  @Get()
-  getHello(): string {
-    return this.analyticsService.getHello();
-  }
-
   @EventPattern('video_downloaded')
-  async handleVideoDownloaded(
-    @Payload() message: any,
-    @Ctx() context: KafkaContext,
-  ) {
-    console.log(message);
-    console.log(`Topic: ${context.getTopic()}`);
+  async handleVideoDownloaded(@Payload() message: any) {
+    console.info(`message: ${message}`);
+    this.analyticsService.updateVideoDownloadCnt(message.id);
   }
 }

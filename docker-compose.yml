@@ -10,7 +10,7 @@ services:
     depends_on:
       - user-service
       - video-service
-      # - analytics-service
+      - analytics-service
     volumes:
       - /tmp/history/npm-cache:/root/.npm:z
       - ./apps/api-gateway/src:/usr/src/app/src:z
@@ -50,17 +50,17 @@ services:
       - STAGE=local
       - POSTGRES_HOST=host.docker.internal
     restart: "no"
-  # analytics-service:
-  #   image: analytics-service
-  #   build:
-  #     context: ./apps/video
-  #     dockerfile: dockerfile
-  #   container_name: analytics-service
-  #   volumes:
-  #     - /tmp/history/npm-cache:/root/.npm:z
-  #     - ./apps/analytics/src:/usr/src/app/src:z
-  #   environment:
-  #     - PORT=3003
-  #     - STAGE=local
-  #     - POSTGRES_HOST=host.docker.internal
-  #   restart: "no"
+  analytics-service:
+    image: analytics-service
+    build:
+      context: ./apps/video
+      dockerfile: dockerfile
+    container_name: analytics-service
+    volumes:
+      - /tmp/history/npm-cache:/root/.npm:z
+      - ./apps/analytics/src:/usr/src/app/src:z
+    environment:
+      - PORT=3003
+      - STAGE=local
+      - POSTGRES_HOST=host.docker.internal
+    restart: "no"
