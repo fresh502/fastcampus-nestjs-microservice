@@ -25,8 +25,13 @@ export class UserService {
   }
 
   // TODO
-  async validateUser(email: string, password) {
-    return '';
+  async validateUser(email: string, password: string) {
+    const pattern = { cmd: 'validate' };
+    const payload = { email, password };
+    const { id } = await firstValueFrom<{ id: string }>(
+      this.client.send<{ id: string }>(pattern, payload),
+    );
+    return id;
   }
 
   // TODO
